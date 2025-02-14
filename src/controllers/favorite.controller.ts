@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Favorite, IFavourite } from "../models/favorite.model";
+import { Favorite, IFavourite } from "../models/favorite.model.js";
 
 // Add or Remove favorite pokemon
 export const updateFavoritePokemon = async (

@@ -2,7 +2,7 @@ import express, { Router } from "express";
 import {
   getPokemonList,
   getPokemonDetails,
-} from "../controllers/pokemon.controller";
+} from "../controllers/pokemon.controller.js";
 
 const router: Router = express.Router();
 
