@@ -72,7 +72,7 @@ package.json
 
 ### 1. **User Routes**
 - `POST /auth/register` – Register a new user.
-- `POST /auth//login` – Authenticate a user.
+- `POST /auth/login` – Authenticate a user.
 
 ### 2. **Pokemon Routes** *(Example)*
 - `GET /pokemon/list` – Fetch all Pokemon.
@@ -84,7 +84,7 @@ package.json
 
 ---
 
-## 🧪 **Testing the API**
+## **Testing the API**
 
 Use tools like **Postman** or **cURL** to test the endpoints.
 
