@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Favorite } from "../models/favorite.model";
+import { Favorite, IFavourite } from "../models/favorite.model";
 
 // Add or Remove favorite pokemon
 export const updateFavoritePokemon = async (
@@ -16,7 +16,7 @@ export const updateFavoritePokemon = async (
 
     const favorites = await Favorite.find({ username });
     res.json({
-      favorites: favorites.map((fav) => {
+      favorites: favorites.map((fav: IFavourite) => {
         return { name: fav.name, id: fav._id };
       }),
     });

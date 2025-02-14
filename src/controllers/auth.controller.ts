@@ -5,7 +5,6 @@ import { User } from "../models/user.model";
 
 const JWT_SECRET = process.env.JWT_SECRET || "mysecret";
 
-// : Promise<Response<any, Record<string, any>> | undefined>
 // user registration
 export const registerUser = async (
   req: Request,

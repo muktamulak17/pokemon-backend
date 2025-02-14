@@ -9,18 +9,18 @@ interface PokemonListData {
 
 interface PokemonData {
   name: string | null;
-  species: { url: string | URL };
+  species: { url: string };
   abilities: { ability: { name: string } }[];
   types: { type: { name: string } }[];
 }
 
 interface SpeciesData {
-  evolution_chain: { url: string | URL };
+  evolution_chain: { url: string };
 }
 
 interface EvolutionData {
   chain: {
-    species: { name: string; url: string | URL };
+    species: { name: string; url: string };
     evolves_to: [];
   };
 }
