@@ -10,7 +10,6 @@ export const registerUser = async (
   req: Request,
   res: Response
 ): Promise<any> => {
-  console.log(req.body);
   const { name, username, password } = req.body;
   try {
     if (!name || !username || !password)
@@ -19,7 +18,6 @@ export const registerUser = async (
         .json({ error: "Please provide name, username, and password" });
 
     const userData = await User.findOne({ username });
-    console.log("userdata - ", userData);
     if (userData)
       return res.status(500).json({
         error: "This username is already exists, try with another one",
@@ -30,7 +28,6 @@ export const registerUser = async (
 
     res.status(200).json({ message: "User registered successfull.", user });
   } catch (error) {
-    console.log("e", error);
     res.status(400).json({ error });
   }
 };
@@ -38,7 +35,6 @@ export const registerUser = async (
 // user login
 export const loginUser = async (req: Request, res: Response): Promise<any> => {
   const { username, password } = req.body;
-  console.log(req.body);
   try {
     if (!username || !password)
       return res
@@ -54,10 +50,8 @@ export const loginUser = async (req: Request, res: Response): Promise<any> => {
     const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
       expiresIn: "1h",
     });
-    console.log(token);
     res.json({ username, token });
   } catch (error) {
-    console.log("loginerr", error);
     res.status(500).json({ error });
   }
 };
