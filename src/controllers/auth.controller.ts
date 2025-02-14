@@ -1,12 +1,16 @@
-import { Request, Response } from "express";
+import { Request, Response, Application } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { User } from "../models/user.model";
 
 const JWT_SECRET = process.env.JWT_SECRET || "mysecret";
 
+// : Promise<Response<any, Record<string, any>> | undefined>
 // user registration
-export const registerUser = async (req: Request, res: Response) => {
+export const registerUser = async (
+  req: Request,
+  res: Response
+): Promise<any> => {
   const { name, username, password } = req.body;
   try {
     if (!name || !username || !password)
@@ -30,7 +34,7 @@ export const registerUser = async (req: Request, res: Response) => {
 };
 
 // user login
-export const loginUser = async (req: Request, res: Response) => {
+export const loginUser = async (req: Request, res: Response): Promise<any> => {
   const { username, password } = req.body;
   try {
     if (!username || !password)

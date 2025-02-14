@@ -1,10 +1,10 @@
-import express from "express";
+import express, { Router } from "express";
 import {
   getPokemonList,
   getPokemonDetails,
 } from "../controllers/pokemon.controller";
 
-const router = express.Router();
+const router: Router = express.Router();
 
 router.get("/list", getPokemonList);
 router.get("/:name", getPokemonDetails);

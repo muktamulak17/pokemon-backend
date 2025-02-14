@@ -1,11 +1,11 @@
-import express from "express";
+import express, { Router } from "express";
 import {
   updateFavoritePokemon,
   getFavoritePokemon,
 } from "../controllers/favorite.controller";
 import { authMiddleware } from "../middlewares/authMiddleware";
 
-const router = express.Router();
+const router: Router = express.Router();
 
 router.post("/update", authMiddleware, updateFavoritePokemon);
 router.get("/list", authMiddleware, getFavoritePokemon);

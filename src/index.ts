@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Application } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import { connectDB } from "./config/db";
@@ -8,7 +8,7 @@ import authRoutes from "./routes/auth.routes";
 
 //Load environment variables
 dotenv.config();
-const app = express();
+const app: Application = express();
 const PORT = process.env.PORT || 3000;
 
 //Middlewares

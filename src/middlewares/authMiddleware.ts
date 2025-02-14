@@ -8,7 +8,7 @@ export const authMiddleware = async (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
+): Promise<any> => {
   const token = req.header("Authorization")?.split(" ")[1];
   if (!token)
     return res.status(401).json({ error: "Access denied for this request" });

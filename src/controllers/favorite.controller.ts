@@ -2,7 +2,10 @@ import { Request, Response } from "express";
 import { Favorite } from "../models/favorite.model";
 
 // Add or Remove favorite pokemon
-export const updateFavoritePokemon = async (req: Request, res: Response) => {
+export const updateFavoritePokemon = async (
+  req: Request,
+  res: Response
+): Promise<any> => {
   const { name, username, action } = req.body;
   try {
     if (action === "add") {
@@ -23,7 +26,10 @@ export const updateFavoritePokemon = async (req: Request, res: Response) => {
 };
 
 //Get favorite pokemon of the user
-export const getFavoritePokemon = async (req: Request, res: Response) => {
+export const getFavoritePokemon = async (
+  req: Request,
+  res: Response
+): Promise<any> => {
   const { username } = req.query;
   try {
     const favorites = await Favorite.find({ username });

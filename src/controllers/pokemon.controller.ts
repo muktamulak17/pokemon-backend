@@ -1,13 +1,41 @@
 import { Request, Response } from "express";
 
+interface PokemonListData {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: { name: string; url: string }[];
+}
+
+interface PokemonData {
+  name: string | null;
+  species: { url: string | URL };
+  abilities: { ability: { name: string } }[];
+  types: { type: { name: string } }[];
+}
+
+interface SpeciesData {
+  evolution_chain: { url: string | URL };
+}
+
+interface EvolutionData {
+  chain: {
+    species: { name: string; url: string | URL };
+    evolves_to: [];
+  };
+}
+
 // fetch first 150 pokemon list
-export const getPokemonList = async (req: Request, res: Response) => {
+export const getPokemonList = async (
+  req: Request,
+  res: Response
+): Promise<any> => {
   const { offset, limit } = req.query;
   try {
     const response = await fetch(
       `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`
     );
-    const data = await response.json();
+    const data = (await response.json()) as PokemonListData;
     res.json(data.results);
   } catch (error) {
     res.status(500).json({ error: `Failed to fetch the pokemon list` });
@@ -15,20 +43,24 @@ export const getPokemonList = async (req: Request, res: Response) => {
 };
 
 // Fetch pokemon details like Abilities,Types, Evolutions
-export const getPokemonDetails = async (req: Request, res: Response) => {
+export const getPokemonDetails = async (
+  req: Request,
+  res: Response
+): Promise<any> => {
   try {
     const { name } = req.params;
     if (!name)
       return res.status(400).json({ error: "Invalid request parameters" });
 
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
-    const pokemonData = await response.json();
+    const pokemonData = (await response.json()) as PokemonData;
 
     //fetch evolution data
-    const speciesResponse = await fetch(pokemonData.species.url);
-    const speciesData = await speciesResponse.json();
+    const speciesResponse = await fetch(pokemonData?.species?.url);
+    const speciesData = (await speciesResponse.json()) as SpeciesData;
+
     const evolutionResponse = await fetch(speciesData.evolution_chain.url);
-    const evolutionData = await evolutionResponse.json();
+    const evolutionData = (await evolutionResponse.json()) as EvolutionData;
 
     res.json({
       name: pokemonData.name,
