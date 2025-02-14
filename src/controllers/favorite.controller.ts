@@ -39,7 +39,7 @@ export const getFavoritePokemon = async (
         .json({ error: `Oops, there are no favorites added in your list` });
 
     res.json({
-      favorites: favorites.map((fav) => {
+      favorites: favorites.map((fav: IFavourite) => {
         return { name: fav.name, id: fav._id };
       }),
     });
